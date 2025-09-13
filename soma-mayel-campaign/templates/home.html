@@ -1,0 +1,166 @@
+<!-- Hero Section with Fullscreen Video -->
+<section class="hero-video" id="heroVideo">
+    <video autoplay muted loop playsinline class="hero-video-element" id="heroVideoElement">
+        <source src="{{.Hero.VideoURL}}" type="video/mp4">
+    </video>
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1 class="hero-title handwritten">{{.Hero.Title}}</h1>
+            <p class="hero-subtitle">{{.Hero.Subtitle}}</p>
+            <div class="hero-scroll-indicator">
+                <span class="scroll-text">Scroll ned</span>
+                <div class="scroll-arrow">↓</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="content-wrapper" id="mainContent">
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-wrapper">
+                <div class="intro-image">
+                    <div class="doodle-frame">
+                        <img src="/static/images/soma-portrait.jpg" alt="Soma Mayel">
+                    </div>
+                </div>
+                <div class="intro-content">
+                    <h2 class="section-title handwritten">Hej, jeg er Soma!</h2>
+                    <p class="intro-text">
+                        Som spidskandidat for Radikale Venstre i Fredensborg Kommune kæmper jeg for et grønnere, 
+                        mere inkluderende og stærkere lokalsamfund. Med min baggrund som jurist, underviser og 
+                        byrådsmedlem har jeg både erfaring og passion for at skabe positive forandringer.
+                    </p>
+                    <div class="intro-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🌱</span>
+                            <span>Grøn omstilling</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">👨‍👩‍👧‍👦</span>
+                            <span>Børn & Familie</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🤝</span>
+                            <span>Inklusion</span>
+                        </div>
+                    </div>
+                    <a href="/om-soma" class="btn btn-primary">Læs mere om mig</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Issues Section -->
+    <section class="issues-section">
+        <div class="container">
+            <h2 class="section-title handwritten text-center">Mine mærkesager</h2>
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <div class="issue-icon">
+                        <div class="doodle-circle">👶</div>
+                    </div>
+                    <h3>Børn & Uddannelse</h3>
+                    <p>Alle børn fortjener en god start med reelle minimumsnormeringer og kvalitetsuddannelse.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">
+                        <div class="doodle-circle">🌍</div>
+                    </div>
+                    <h3>Bæredygtighed</h3>
+                    <p>Vi skal handle nu for at sikre en grøn fremtid for kommende generationer.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">
+                        <div class="doodle-circle">🏘️</div>
+                    </div>
+                    <h3>Inklusion</h3>
+                    <p>Fredensborg skal være en kommune for alle - uanset baggrund.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">
+                        <div class="doodle-circle">💪</div>
+                    </div>
+                    <h3>Social Retfærdighed</h3>
+                    <p>Sammen bekæmper vi ulighed og skaber lige muligheder for alle.</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/politik" class="btn btn-outline">Se alle mærkesager</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facebook Feed Section -->
+    <section class="facebook-section">
+        <div class="container">
+            <h2 class="section-title handwritten text-center">Følg med på Facebook</h2>
+            <div class="facebook-wrapper">
+                <div class="fb-page" 
+                     data-href="https://www.facebook.com/somamayel" 
+                     data-tabs="timeline" 
+                     data-width="500" 
+                     data-height="600" 
+                     data-small-header="false" 
+                     data-adapt-container-width="true" 
+                     data-hide-cover="false" 
+                     data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/somamayel" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/somamayel">Soma Mayel på Facebook</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    {{if .Posts}}
+    <section class="news-section">
+        <div class="container">
+            <h2 class="section-title handwritten text-center">Seneste nyt</h2>
+            <div class="news-grid">
+                {{range .Posts}}
+                <article class="news-card">
+                    <div class="news-image">
+                        <div class="doodle-frame-small">
+                            <img src="{{.Image}}" alt="{{.Title}}">
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <time class="news-date">{{.Date.Format "2. January 2006"}}</time>
+                        <h3 class="news-title">{{.Title}}</h3>
+                        <p class="news-excerpt">{{.Excerpt}}</p>
+                        <a href="/blog/{{.Slug}}" class="news-link">Læs mere →</a>
+                    </div>
+                </article>
+                {{end}}
+            </div>
+            <div class="text-center mt-4">
+                <a href="/nyheder" class="btn btn-outline">Se alle nyheder</a>
+            </div>
+        </div>
+    </section>
+    {{end}}
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2 class="cta-title handwritten">Lad os skabe forandring sammen!</h2>
+                <p class="cta-text">Stem på Soma Mayel og Radikale Venstre ved kommunalvalget 2025</p>
+                <div class="cta-buttons">
+                    <a href="/kontakt" class="btn btn-primary">Kontakt mig</a>
+                    <a href="https://www.facebook.com/somamayel" target="_blank" class="btn btn-outline">Følg på Facebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+        src="https://connect.facebook.net/da_DK/sdk.js#xfbml=1&version=v18.0">
+</script>

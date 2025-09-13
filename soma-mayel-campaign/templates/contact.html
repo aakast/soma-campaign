@@ -1,0 +1,317 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title handwritten">Kontakt Soma</h1>
+        <p class="page-subtitle">Lad os tale sammen om fremtidens Fredensborg</p>
+    </div>
+</div>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h2 class="handwritten">Kom i kontakt</h2>
+                <p class="contact-intro">
+                    Har du spørgsmål, idéer eller vil du være med til at forme fremtidens Fredensborg? 
+                    Jeg vil meget gerne høre fra dig!
+                </p>
+                
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="doodle-circle-small">📧</div>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:{{.ContactInfo.Email}}">{{.ContactInfo.Email}}</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="doodle-circle-small">📱</div>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <a href="tel:{{.ContactInfo.Phone}}">{{.ContactInfo.Phone}}</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="doodle-circle-small">👍</div>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Facebook</h3>
+                            <a href="{{.ContactInfo.Facebook}}" target="_blank">Følg mig på Facebook</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="doodle-circle-small">📍</div>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Område</h3>
+                            <p>{{.ContactInfo.Address}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <div class="form-decoration">
+                    <h3 class="handwritten">Send en besked</h3>
+                </div>
+                <form class="contact-form" action="/api/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name">Dit navn</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Din email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Emne</label>
+                        <select id="subject" name="subject">
+                            <option value="general">Generel henvendelse</option>
+                            <option value="volunteer">Jeg vil gerne hjælpe</option>
+                            <option value="policy">Spørgsmål om politik</option>
+                            <option value="event">Invitation til arrangement</option>
+                            <option value="other">Andet</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Din besked</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Send besked
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="volunteer-section">
+    <div class="container">
+        <div class="volunteer-wrapper">
+            <h2 class="section-title handwritten text-center">Vil du være frivillig?</h2>
+            <p class="volunteer-text">
+                Kampagnen har brug for engagerede mennesker som dig! Der er mange måder at bidrage på:
+            </p>
+            <div class="volunteer-options">
+                <div class="volunteer-card">
+                    <span class="volunteer-icon">🚪</span>
+                    <h3>Dørklokker</h3>
+                    <p>Hjælp med at møde borgerne ansigt til ansigt</p>
+                </div>
+                <div class="volunteer-card">
+                    <span class="volunteer-icon">📢</span>
+                    <h3>Dele budskaber</h3>
+                    <p>Spred ordet på sociale medier</p>
+                </div>
+                <div class="volunteer-card">
+                    <span class="volunteer-icon">🎪</span>
+                    <h3>Arrangementer</h3>
+                    <p>Hjælp til ved valgmøder og events</p>
+                </div>
+                <div class="volunteer-card">
+                    <span class="volunteer-icon">✍️</span>
+                    <h3>Skrive indhold</h3>
+                    <p>Bidrag med tekster og idéer</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="mailto:{{.ContactInfo.Email}}?subject=Jeg vil gerne være frivillig" class="btn btn-primary">
+                    Meld dig som frivillig
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.contact-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+}
+
+.contact-intro {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.doodle-circle-small {
+    width: 60px;
+    height: 60px;
+    background: var(--gray-100);
+    border: 2px solid var(--radikale-magenta);
+    border-radius: 50% 40% 40% 50% / 40% 50% 50% 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transform: rotate(-5deg);
+}
+
+.contact-details h3 {
+    color: var(--radikale-green);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.contact-details a {
+    color: var(--radikale-black);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--radikale-magenta);
+}
+
+.contact-form-wrapper {
+    background: var(--radikale-white);
+    border: 3px dashed var(--radikale-green);
+    border-radius: 20px;
+    padding: var(--spacing-xl);
+    position: relative;
+}
+
+.form-decoration {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-decoration h3 {
+    font-size: 2rem;
+    color: var(--radikale-magenta);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    color: var(--radikale-black);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--gray-300);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--radikale-green);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.volunteer-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--gray-100);
+}
+
+.volunteer-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.volunteer-text {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+.volunteer-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.volunteer-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--radikale-white);
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.volunteer-card:hover {
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.volunteer-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
+.volunteer-card h3 {
+    color: var(--radikale-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+.volunteer-card p {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .volunteer-options {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+</style>

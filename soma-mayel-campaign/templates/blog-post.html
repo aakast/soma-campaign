@@ -1,0 +1,263 @@
+<article class="blog-post">
+    <div class="container">
+        <div class="blog-header">
+            <a href="/nyheder" class="back-link">← Tilbage til nyheder</a>
+            <h1 class="blog-title handwritten">{{.Post.Title}}</h1>
+            <div class="blog-meta">
+                <time class="blog-date">{{.Post.Date.Format "2. January 2006"}}</time>
+                <span class="blog-author">Af {{.Post.Author}}</span>
+            </div>
+            {{if .Post.Tags}}
+            <div class="blog-tags">
+                {{range .Post.Tags}}
+                <span class="tag">#{{.}}</span>
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+        
+        {{if .Post.Image}}
+        <div class="blog-image">
+            <div class="doodle-frame-large">
+                <img src="{{.Post.Image}}" alt="{{.Post.Title}}">
+            </div>
+        </div>
+        {{end}}
+        
+        <div class="blog-content">
+            {{.Post.Content}}
+        </div>
+        
+        <div class="blog-footer">
+            <div class="share-section">
+                <h3 class="handwritten">Del denne artikel</h3>
+                <div class="share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{.Post.Slug}}" 
+                       target="_blank" 
+                       class="share-button facebook">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Del på Facebook
+                    </a>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <h3 class="handwritten">Vil du høre mere?</h3>
+                <p>Følg med i kampagnen og få de seneste nyheder direkte fra mig.</p>
+                <div class="cta-buttons">
+                    <a href="/kontakt" class="btn btn-primary">Kontakt mig</a>
+                    <a href="https://www.facebook.com/somamayel" target="_blank" class="btn btn-outline">
+                        Følg på Facebook
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<style>
+.blog-post {
+    padding: calc(80px + var(--spacing-xxl)) 0 var(--spacing-xxl);
+}
+
+.blog-header {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xxl);
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--radikale-green);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--radikale-magenta);
+}
+
+.blog-title {
+    font-size: 3rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-md);
+}
+
+.blog-date {
+    color: var(--radikale-magenta);
+    font-weight: 600;
+}
+
+.blog-tags {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 15px;
+    font-size: 0.875rem;
+}
+
+.blog-image {
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-xxl);
+}
+
+.doodle-frame-large {
+    padding: var(--spacing-md);
+    background: var(--radikale-white);
+    border: 4px solid var(--radikale-green);
+    border-radius: 20px;
+    transform: rotate(-1deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.doodle-frame-large img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.blog-content {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xxl);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+}
+
+.blog-content p {
+    margin-bottom: var(--spacing-lg);
+}
+
+.blog-content h2 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.5rem;
+    color: var(--radikale-green);
+    margin: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+.blog-content h3 {
+    color: var(--radikale-magenta);
+    margin: var(--spacing-xl) 0 var(--spacing-md);
+}
+
+.blog-content ul,
+.blog-content ol {
+    margin-bottom: var(--spacing-lg);
+    padding-left: var(--spacing-xl);
+}
+
+.blog-content li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.blog-footer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.share-section {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--gray-100);
+    border-radius: 20px;
+    margin-bottom: var(--spacing-xl);
+}
+
+.share-section h3 {
+    font-size: 2rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--radikale-white);
+    border: 2px solid var(--gray-300);
+    border-radius: 25px;
+    text-decoration: none;
+    color: var(--radikale-black);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.share-button.facebook {
+    border-color: #1877F2;
+    color: #1877F2;
+}
+
+.share-button.facebook:hover {
+    background: #1877F2;
+    color: var(--radikale-white);
+}
+
+.share-button svg {
+    fill: currentColor;
+}
+
+.cta-box {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(232, 93, 117, 0.1));
+    border-radius: 30px;
+}
+
+.cta-box h3 {
+    font-size: 2.5rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.cta-box p {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+    .blog-title {
+        font-size: 2rem;
+    }
+    
+    .blog-meta {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .blog-content {
+        font-size: 1rem;
+    }
+}
+</style>

@@ -1,0 +1,234 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title handwritten">Nyheder og Blog</h1>
+        <p class="page-subtitle">Følg med i kampagnen og få de seneste opdateringer</p>
+    </div>
+</div>
+
+<section class="news-list-section">
+    <div class="container">
+        {{if .Posts}}
+        <div class="news-grid">
+            {{range .Posts}}
+            <article class="news-card-large">
+                <div class="news-image-wrapper">
+                    <div class="doodle-frame-news">
+                        <img src="{{.Image}}" alt="{{.Title}}">
+                    </div>
+                    {{if .IsFeatured}}
+                    <span class="featured-badge">Fremhævet</span>
+                    {{end}}
+                </div>
+                <div class="news-card-content">
+                    <div class="news-meta">
+                        <time class="news-date">{{.Date.Format "2. January 2006"}}</time>
+                        {{if .Tags}}
+                        <div class="news-tags">
+                            {{range .Tags}}
+                            <span class="tag">#{{.}}</span>
+                            {{end}}
+                        </div>
+                        {{end}}
+                    </div>
+                    <h2 class="news-card-title">
+                        <a href="/blog/{{.Slug}}">{{.Title}}</a>
+                    </h2>
+                    <p class="news-card-excerpt">{{.Excerpt}}</p>
+                    <div class="news-card-footer">
+                        <span class="news-author">Af {{.Author}}</span>
+                        <a href="/blog/{{.Slug}}" class="read-more-link">
+                            Læs mere 
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{end}}
+        </div>
+        {{else}}
+        <div class="no-posts">
+            <div class="no-posts-icon">📝</div>
+            <h2>Ingen nyheder endnu</h2>
+            <p>Kom tilbage snart for de seneste opdateringer fra kampagnen!</p>
+        </div>
+        {{end}}
+    </div>
+</section>
+
+<style>
+.news-list-section {
+    padding: var(--spacing-xxl) 0;
+    min-height: 60vh;
+}
+
+.news-grid {
+    display: grid;
+    gap: var(--spacing-xxl);
+}
+
+.news-card-large {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: var(--spacing-xl);
+    background: var(--radikale-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.news-card-large:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+.news-image-wrapper {
+    position: relative;
+}
+
+.doodle-frame-news {
+    height: 100%;
+    background: linear-gradient(135deg, var(--radikale-green), var(--radikale-magenta));
+    padding: 3px;
+}
+
+.doodle-frame-news img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    background: var(--radikale-magenta);
+    color: var(--radikale-white);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.news-card-content {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.news-date {
+    color: var(--radikale-magenta);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.news-tags {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.tag {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+.news-card-title {
+    margin-bottom: var(--spacing-md);
+}
+
+.news-card-title a {
+    color: var(--radikale-black);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-card-title a:hover {
+    color: var(--radikale-green);
+}
+
+.news-card-excerpt {
+    color: var(--gray-600);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: var(--spacing-lg);
+}
+
+.news-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.news-author {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+.read-more-link {
+    color: var(--radikale-green);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    transition: all 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: var(--radikale-magenta);
+    gap: var(--spacing-sm);
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.read-more-link:hover .arrow {
+    transform: translateX(5px);
+}
+
+.no-posts {
+    text-align: center;
+    padding: var(--spacing-xxl);
+}
+
+.no-posts-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.no-posts h2 {
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-md);
+}
+
+.no-posts p {
+    color: var(--gray-500);
+}
+
+@media (max-width: 768px) {
+    .news-card-large {
+        grid-template-columns: 1fr;
+    }
+    
+    .doodle-frame-news {
+        height: 200px;
+    }
+    
+    .news-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}
+</style>

@@ -1,0 +1,89 @@
+<div class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-icon">
+                <div class="doodle-404">404</div>
+            </div>
+            <h1 class="error-title handwritten">Ups! Siden findes ikke</h1>
+            <p class="error-message">
+                Det ser ud til, at siden du leder efter er blevet væk. 
+                Måske er den flyttet, eller også har vi lavet en fejl.
+            </p>
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">Gå til forsiden</a>
+                <a href="/kontakt" class="btn btn-outline">Kontakt os</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl) 0;
+}
+
+.error-content {
+    text-align: center;
+    max-width: 600px;
+}
+
+.error-icon {
+    margin-bottom: var(--spacing-xl);
+}
+
+.doodle-404 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--radikale-magenta);
+    display: inline-block;
+    transform: rotate(-5deg);
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+.error-title {
+    font-size: 3rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.error-message {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .doodle-404 {
+        font-size: 5rem;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+    }
+}
+</style>
