@@ -1,0 +1,214 @@
+{{/* Admin UI page */}}
+<section class="admin">
+    <div class="container">
+        <h1 class="handwritten">Admin - Content Manager</h1>
+
+        <div class="admin-actions" style="margin: 16px 0;">
+            <button id="newPostBtn" class="btn btn-primary">Ny artikel</button>
+            <input id="searchInput" type="text" placeholder="Søg…" style="margin-left:12px;padding:8px;">
+        </div>
+
+        <div id="postsList" class="news-grid"></div>
+
+        <div id="editorModal" class="modal" style="display:none;">
+            <div class="modal-content" style="max-width:900px;">
+                <h2 id="editorTitle">Rediger artikel</h2>
+                <form id="postForm">
+                    <input type="hidden" id="postId">
+                    <div class="form-row">
+                        <label>Titel</label>
+                        <input id="titleInput" type="text" required>
+                    </div>
+                    <div class="form-row">
+                        <label>Slug</label>
+                        <input id="slugInput" type="text" required>
+                    </div>
+                    <div class="form-row">
+                        <label>Dato</label>
+                        <input id="dateInput" type="date">
+                    </div>
+                    <div class="form-row">
+                        <label>Uddrag</label>
+                        <textarea id="excerptInput" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <label>Indhold</label>
+                        <textarea id="contentInput" rows="10" style="font-family:monospace"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <label>Forfatter</label>
+                        <input id="authorInput" type="text">
+                    </div>
+                    <div class="form-row">
+                        <label>Billede URL</label>
+                        <div style="display:flex;gap:8px;align-items:center;">
+                            <input id="imageInput" type="text" placeholder="/static/images/uploads/..." style="flex:1;">
+                            <input id="imageFile" type="file" accept="image/*">
+                            <button id="uploadBtn" type="button" class="btn">Upload</button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label>Tags (kommasepareret)</label>
+                        <input id="tagsInput" type="text" placeholder="klima, politik">
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input id="featuredInput" type="checkbox">
+                            Fremhævet
+                        </label>
+                    </div>
+                    <div class="form-actions" style="display:flex;gap:8px;justify-content:flex-end;">
+                        <button id="saveBtn" type="submit" class="btn btn-primary">Gem</button>
+                        <button id="cancelBtn" type="button" class="btn btn-outline">Luk</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <style>
+            .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);padding:24px;}
+            .modal-content{background:#fff;border-radius:8px;margin:0 auto;padding:16px;}
+            .form-row{margin-bottom:12px;display:flex;flex-direction:column;}
+            .form-row>label{font-weight:600;margin-bottom:6px;}
+            .form-row input[type=text], .form-row input[type=date], .form-row textarea{padding:8px;border:1px solid #ddd;border-radius:6px;}
+            .admin-card{background:#fff;border-radius:8px;padding:12px;border:1px solid #eee;}
+            .admin-card h3{margin:0 0 6px 0;}
+        </style>
+
+        <script>
+            const postsList = document.getElementById('postsList');
+            const newBtn = document.getElementById('newPostBtn');
+            const searchInput = document.getElementById('searchInput');
+            const modal = document.getElementById('editorModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const imageFile = document.getElementById('imageFile');
+
+            const postId = document.getElementById('postId');
+            const titleInput = document.getElementById('titleInput');
+            const slugInput = document.getElementById('slugInput');
+            const dateInput = document.getElementById('dateInput');
+            const excerptInput = document.getElementById('excerptInput');
+            const contentInput = document.getElementById('contentInput');
+            const authorInput = document.getElementById('authorInput');
+            const imageInput = document.getElementById('imageInput');
+            const tagsInput = document.getElementById('tagsInput');
+            const featuredInput = document.getElementById('featuredInput');
+
+            function fmtDate(d){
+                const dt = new Date(d);
+                return dt.toISOString().slice(0,10);
+            }
+
+            function openModal(){ modal.style.display = 'block'; }
+            function closeModal(){ modal.style.display = 'none'; }
+
+            function emptyForm(){
+                postId.value = '';
+                titleInput.value = '';
+                slugInput.value = '';
+                dateInput.value = fmtDate(new Date());
+                excerptInput.value = '';
+                contentInput.value = '';
+                authorInput.value = '';
+                imageInput.value = '';
+                tagsInput.value = '';
+                featuredInput.checked = false;
+            }
+
+            async function loadPosts(){
+                const res = await fetch('/api/admin/posts');
+                const data = await res.json();
+                renderPosts(data);
+            }
+
+            function renderPosts(items){
+                const q = searchInput.value.toLowerCase();
+                const filtered = items.filter(p => !q || (p.title||'').toLowerCase().includes(q) || (p.slug||'').toLowerCase().includes(q));
+                postsList.innerHTML = '';
+                filtered.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'admin-card';
+                    card.innerHTML = `
+                        <h3>${p.title||'(uden titel)'}</h3>
+                        <div style="font-size:12px;color:#666;">${p.slug||''} • ${new Date(p.date).toLocaleDateString()}</div>
+                        <div style="margin-top:8px;display:flex;gap:8px;">
+                            <button class="btn" data-edit="${p.id}">Rediger</button>
+                            <button class="btn" data-delete="${p.id}">Slet</button>
+                            <a class="btn btn-outline" href="/blog/${p.slug}" target="_blank">Vis</a>
+                        </div>
+                    `;
+                    postsList.appendChild(card);
+                });
+
+                postsList.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', async (e) => {
+                    const id = e.currentTarget.getAttribute('data-edit');
+                    const res = await fetch('/api/admin/posts/'+id);
+                    if(res.ok){
+                        const p = await res.json();
+                        postId.value = p.id||'';
+                        titleInput.value = p.title||'';
+                        slugInput.value = p.slug||'';
+                        dateInput.value = fmtDate(p.date||new Date());
+                        excerptInput.value = p.excerpt||'';
+                        contentInput.value = p.content||'';
+                        authorInput.value = p.author||'';
+                        imageInput.value = p.image||'';
+                        tagsInput.value = (p.tags||[]).join(', ');
+                        featuredInput.checked = !!p.is_featured;
+                        openModal();
+                    }
+                }));
+
+                postsList.querySelectorAll('[data-delete]').forEach(btn => btn.addEventListener('click', async (e) => {
+                    const id = e.currentTarget.getAttribute('data-delete');
+                    if(confirm('Slet denne artikel?')){
+                        const res = await fetch('/api/admin/posts/'+id, { method: 'DELETE' });
+                        if(res.ok) loadPosts();
+                    }
+                }));
+            }
+
+            newBtn.addEventListener('click', () => { emptyForm(); openModal(); });
+            cancelBtn.addEventListener('click', () => closeModal());
+            searchInput.addEventListener('input', () => loadPosts());
+
+            document.getElementById('postForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const payload = {
+                    id: postId.value || undefined,
+                    title: titleInput.value,
+                    slug: slugInput.value,
+                    date: dateInput.value,
+                    excerpt: excerptInput.value,
+                    content: contentInput.value,
+                    author: authorInput.value,
+                    image: imageInput.value,
+                    tags: tagsInput.value.split(',').map(s => s.trim()).filter(Boolean),
+                    is_featured: !!featuredInput.checked,
+                };
+                const res = await fetch('/api/admin/posts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                if(res.ok){
+                    closeModal();
+                    await loadPosts();
+                }
+            });
+
+            uploadBtn.addEventListener('click', async () => {
+                if(!imageFile.files[0]) return alert('Vælg et billede');
+                const fd = new FormData();
+                fd.append('file', imageFile.files[0]);
+                const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+                const data = await res.json();
+                if(data.url){ imageInput.value = data.url; }
+            });
+
+            loadPosts();
+        </script>
+    </div>
+</section>
+

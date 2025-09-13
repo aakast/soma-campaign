@@ -7,7 +7,7 @@ A modern, responsive campaign website for Soma Mayel, lead candidate (Spidskandi
 - 🎨 **Beautiful Design**: Incorporates Radikale Venstre's brand colors with a playful "children's drawings" aesthetic
 - 🎥 **Fullscreen Video Hero**: Engaging landing page with autoplay video that pauses on scroll
 - 📱 **Fully Responsive**: Works perfectly on all devices
-- ✏️ **CMS Integration**: TinaCMS for easy content management
+- ✏️ **CMS Integration**: Built-in admin UI with Basic Auth and file-based JSON content
 - 📘 **Facebook Integration**: Embedded Facebook feed for social media engagement
 - 🚀 **Fast & Lightweight**: Built with Go and Fiber framework for optimal performance
 - 🐳 **Docker Ready**: Easy deployment with Docker and Docker Compose
@@ -17,7 +17,7 @@ A modern, responsive campaign website for Soma Mayel, lead candidate (Spidskandi
 - **Backend**: Go with Fiber web framework
 - **Templates**: HTML with Go's template engine
 - **Styling**: Custom CSS with Radikale Venstre color scheme
-- **CMS**: TinaCMS for content management
+- **CMS**: Built-in admin UI (Tina-like) for content management
 - **Deployment**: Docker & Docker Compose
 
 ## Quick Start
@@ -78,7 +78,7 @@ go run main.go
 │   ├── politics.go
 │   ├── news.go
 │   ├── contact.go
-│   └── tina.go            # TinaCMS API handlers
+│   └── tina.go            # Legacy TinaCMS API handlers (optional)
 ├── models/                 # Data models
 │   ├── post.go
 │   └── content.go
@@ -102,8 +102,8 @@ go run main.go
 ├── content/                # CMS content (JSON files)
 │   ├── posts/             # Blog posts
 │   └── pages/             # Static pages
-├── tina/                   # TinaCMS configuration
-│   └── config.js
+├── templates/
+│   └── admin.html         # Admin UI
 ├── Dockerfile
 ├── docker-compose.yml
 └── .env.example
@@ -117,16 +117,18 @@ Create a `.env` file based on `.env.example`:
 
 - `PORT`: Application port (default: 3000)
 - `ENV`: Environment (development/production)
-- `TINA_PUBLIC_CLIENT_ID`: TinaCMS client ID
+- `ADMIN_USERNAME`: Basic auth username for admin (default: admin)
+- `ADMIN_PASSWORD`: Basic auth password for admin (default: admin123)
 - `FACEBOOK_PAGE_ID`: Facebook page for social feed
 - `CONTACT_EMAIL`: Email for contact form submissions
 
-### TinaCMS Setup
+### Admin CMS
 
-1. Create a TinaCMS account at https://tina.io
-2. Configure your repository
-3. Add your client ID and token to `.env`
-4. Access the CMS at `/admin`
+Access the admin UI at `/admin` (protected by Basic Auth). From here you can:
+- Create, edit, delete blog posts
+- Upload images (stored under `static/images/uploads/`)
+
+Content is stored as JSON under `content/posts/`.
 
 ### Adding Content
 
