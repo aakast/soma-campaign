@@ -16,6 +16,9 @@ RUN go mod download
 # Copy source code
 COPY . .
 
+# Ensure content directories exist even if repo doesn't include them
+RUN mkdir -p content/posts content/pages
+
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
