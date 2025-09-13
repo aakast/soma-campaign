@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} | Soma Mayel - Radikale Venstre</title>
+    <meta name="description" content="Soma Mayel - Spidskandidat for Radikale Venstre i Fredensborg Kommune. Sammen skaber vi et grønnere og mere inkluderende Fredensborg.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    
+    <!-- TinaCMS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tinacms/tinacms@latest/dist/tinacms.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <div class="logo-drawing">
+                        <svg viewBox="0 0 100 40" class="logo-svg">
+                            <text x="5" y="30" class="logo-text">Soma</text>
+                        </svg>
+                    </div>
+                    <span class="logo-subtitle">Radikale Venstre</span>
+                </a>
+                
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/" class="nav-link">Forside</a></li>
+                    <li><a href="/om-soma" class="nav-link">Om Soma</a></li>
+                    <li><a href="/politik" class="nav-link">Politik</a></li>
+                    <li><a href="/nyheder" class="nav-link">Nyheder</a></li>
+                    <li><a href="/kontakt" class="nav-link">Kontakt</a></li>
+                    <li class="nav-social">
+                        <a href="https://www.facebook.com/somamayel" target="_blank" class="social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {{embed}}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Soma Mayel</h3>
+                    <p class="footer-text">Spidskandidat for Radikale Venstre<br>Fredensborg Kommune</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/somamayel" target="_blank" class="footer-social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Hurtige Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/om-soma">Om Soma</a></li>
+                        <li><a href="/politik">Politik</a></li>
+                        <li><a href="/nyheder">Nyheder</a></li>
+                        <li><a href="/kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Radikale Venstre</h3>
+                    <p class="footer-text">Fredensborg Kommune</p>
+                    <a href="https://www.radikale.dk" target="_blank" class="footer-party-link">
+                        Besøg partiets hjemmeside →
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Soma Mayel. Alle rettigheder forbeholdes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

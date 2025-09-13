@@ -1,0 +1,367 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title handwritten">Om Soma Mayel</h1>
+        <p class="page-subtitle">Fra flygtning til folkevalgt - en historie om håb og handling</p>
+    </div>
+</div>
+
+<section class="about-hero">
+    <div class="container">
+        <div class="about-hero-content">
+            <div class="about-image">
+                <div class="doodle-frame large">
+                    <img src="/static/images/soma-portrait-large.jpg" alt="Soma Mayel">
+                </div>
+            </div>
+            <div class="about-intro">
+                <h2 class="handwritten">Min historie</h2>
+                <p class="lead">
+                    Jeg hedder Soma Mayel, og jeg er 31 år gammel. Jeg kom til Danmark som 7-årig flygtning 
+                    fra Afghanistan i 2001. I dag er jeg jurist, underviser, mor til to og spidskandidat for 
+                    Radikale Venstre i Fredensborg Kommune.
+                </p>
+                <p>
+                    Min rejse fra Mazar-e Sharif til Kokkedal har formet, hvem jeg er i dag. Den har givet mig 
+                    en dyb forståelse for vigtigheden af inklusion, lige muligheder og et samfund, hvor alle 
+                    kan bidrage og trives.
+                </p>
+                <div class="about-facts">
+                    <div class="fact-item">
+                        <span class="fact-icon">📚</span>
+                        <span>Cand.jur. fra Københavns Universitet</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-icon">⚖️</span>
+                        <span>Fuldmægtig i Udlændingestyrelsen</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-icon">👨‍👩‍👧‍👦</span>
+                        <span>Mor til to børn</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-icon">🏛️</span>
+                        <span>Byrådsmedlem siden 2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="timeline-section">
+    <div class="container">
+        <h2 class="section-title handwritten text-center">Min rejse</h2>
+        <div class="timeline">
+            {{range .Timeline}}
+            <div class="timeline-item">
+                <div class="timeline-marker">
+                    <span class="timeline-year">{{.Year}}</span>
+                </div>
+                <div class="timeline-content">
+                    <h3>{{.Title}}</h3>
+                    <p>{{.Description}}</p>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+</section>
+
+<section class="experience-section">
+    <div class="container">
+        <h2 class="section-title handwritten text-center">Erfaring og kompetencer</h2>
+        
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <div class="doodle-circle">⚖️</div>
+                </div>
+                <h3>Juridisk ekspertise</h3>
+                <p>
+                    Specialiseret i udlændinge- og flygtningeret med næsten 10 års erfaring 
+                    fra Udlændingestyrelsen. Underviser på Københavns Universitet.
+                </p>
+            </div>
+            
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <div class="doodle-circle">🏛️</div>
+                </div>
+                <h3>Politisk erfaring</h3>
+                <p>
+                    Byrådsmedlem siden 2021, formand for flere udvalg, og nu spidskandidat 
+                    for Radikale Venstre i Fredensborg Kommune.
+                </p>
+            </div>
+            
+            <div class="experience-card">
+                <div class="experience-icon">
+                    <div class="doodle-circle">🤝</div>
+                </div>
+                <h3>Socialt engagement</h3>
+                <p>
+                    10 års erfaring med socialt arbejde i Fredensborg Kommune, mentor for 
+                    unge i udfordrede boligområder.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="roles-section">
+    <div class="container">
+        <h2 class="section-title handwritten text-center">Mine roller i byrådet</h2>
+        <div class="roles-grid">
+            {{range .Roles}}
+            <div class="role-card">
+                <div class="role-icon-wrapper">
+                    <span class="role-icon">{{.Icon}}</span>
+                </div>
+                <h4>{{.Title}}</h4>
+            </div>
+            {{end}}
+        </div>
+    </div>
+</section>
+
+<section class="values-section">
+    <div class="container">
+        <div class="values-content">
+            <h2 class="section-title handwritten">Mine værdier</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <h3>Inklusion</h3>
+                    <p>Fredensborg skal være en kommune for alle - uanset hudfarve, etnicitet, seksualitet, køn, religion, handicap eller kultur.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Bæredygtighed</h3>
+                    <p>Vi skal handle ansvarligt og sikre en grøn fremtid for kommende generationer.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Retfærdighed</h3>
+                    <p>Jeg kæmper for et samfund med mindre ulighed og flere lige muligheder.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Fællesskab</h3>
+                    <p>Politik skal samle, ikke splitte. Sammen er vi stærkere.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.page-header {
+    padding: calc(80px + var(--spacing-xxl)) 0 var(--spacing-xxl);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(232, 93, 117, 0.1));
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+}
+
+.about-hero {
+    padding: var(--spacing-xxl) 0;
+}
+
+.about-hero-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+}
+
+.doodle-frame.large {
+    transform: rotate(-3deg);
+}
+
+.lead {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 500;
+}
+
+.about-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.fact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--gray-100);
+    border-radius: 15px;
+}
+
+.fact-icon {
+    font-size: 1.5rem;
+}
+
+.timeline-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--gray-100);
+}
+
+.timeline {
+    position: relative;
+    padding: var(--spacing-xl) 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--radikale-green);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xxl);
+    position: relative;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--radikale-magenta);
+    color: var(--radikale-white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 20px;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.timeline-content {
+    width: 45%;
+    padding: var(--spacing-lg);
+    background: var(--radikale-white);
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+}
+
+.experience-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.experience-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--radikale-white);
+    border: 2px dashed var(--radikale-green);
+    border-radius: 20px;
+}
+
+.experience-icon {
+    margin-bottom: var(--spacing-lg);
+}
+
+.roles-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--gray-100);
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.role-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--radikale-white);
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.role-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: var(--radikale-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--radikale-white);
+}
+
+.values-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.value-item {
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(232, 93, 117, 0.05));
+    border-radius: 20px;
+    border-left: 4px solid var(--radikale-magenta);
+}
+
+.value-item h3 {
+    color: var(--radikale-green);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .about-hero-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: row !important;
+    }
+    
+    .timeline-marker {
+        left: 30px;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 80px !important;
+    }
+}
+</style>

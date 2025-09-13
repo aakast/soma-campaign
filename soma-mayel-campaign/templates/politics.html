@@ -1,0 +1,359 @@
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title handwritten">Politik og Mærkesager</h1>
+        <p class="page-subtitle">Sammen skaber vi et grønnere, mere inkluderende og stærkere Fredensborg</p>
+    </div>
+</div>
+
+<section class="politics-intro">
+    <div class="container">
+        <div class="politics-quote">
+            <blockquote class="handwritten">
+                "Jeg er hårdtarbejdende, idealistisk og har store visioner for, hvordan jeg gennem mit 
+                politiske arbejde kan være med til at flytte Fredensborg kommune i en mere bæredygtig retning."
+            </blockquote>
+            <cite>- Soma Mayel</cite>
+        </div>
+    </div>
+</section>
+
+<section class="policy-areas">
+    <div class="container">
+        <h2 class="section-title handwritten text-center">Mine kerneområder</h2>
+        
+        {{range .PolicyAreas}}
+        <div class="policy-card">
+            <div class="policy-header">
+                <div class="policy-icon">
+                    <div class="doodle-shape">{{.Icon}}</div>
+                </div>
+                <div class="policy-title-wrapper">
+                    <h3 class="policy-title">{{.Title}}</h3>
+                    <p class="policy-description">{{.Description}}</p>
+                </div>
+            </div>
+            <div class="policy-content">
+                <ul class="policy-points">
+                    {{range .Points}}
+                    <li>
+                        <span class="point-marker">✓</span>
+                        <span>{{.}}</span>
+                    </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</section>
+
+<section class="vision-section">
+    <div class="container">
+        <h2 class="section-title handwritten text-center">Min vision for Fredensborg</h2>
+        <div class="vision-grid">
+            <div class="vision-card">
+                <div class="vision-number handwritten">1</div>
+                <h3>En grøn kommune</h3>
+                <p>
+                    Fredensborg skal gå forrest i den grønne omstilling. Vi skal investere i 
+                    vedvarende energi, fremme bæredygtig transport og beskytte vores natur.
+                </p>
+            </div>
+            <div class="vision-card">
+                <div class="vision-number handwritten">2</div>
+                <h3>Et inkluderende samfund</h3>
+                <p>
+                    Alle borgere skal føle sig velkomne og værdsat. Vi skal bygge broer mellem 
+                    forskellige grupper og sikre, at alle har en stemme.
+                </p>
+            </div>
+            <div class="vision-card">
+                <div class="vision-number handwritten">3</div>
+                <h3>Kvalitet i velfærden</h3>
+                <p>
+                    Vores børn, ældre og udsatte borgere fortjener den bedste omsorg. Vi skal 
+                    investere i velfærd, ikke spare den væk.
+                </p>
+            </div>
+            <div class="vision-card">
+                <div class="vision-number handwritten">4</div>
+                <h3>Levende lokalsamfund</h3>
+                <p>
+                    Fredensborg skal være et attraktivt sted at bo, arbejde og leve. Vi skal 
+                    støtte lokale initiativer og skabe rum for fællesskab.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="action-section">
+    <div class="container">
+        <div class="action-wrapper">
+            <h2 class="section-title handwritten">Sådan gør vi det sammen</h2>
+            <div class="action-content">
+                <p class="action-intro">
+                    Politik handler ikke kun om store visioner - det handler om konkret handling. 
+                    Her er nogle af de initiativer, jeg vil arbejde for:
+                </p>
+                <div class="action-grid">
+                    <div class="action-item">
+                        <span class="action-icon">📚</span>
+                        <h4>Minimumsnormeringer der virker</h4>
+                        <p>Ikke bare tal på papir, men reelle forbedringer i hverdagen</p>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">🧠</span>
+                        <h4>Mental sundhed på skoleskemaet</h4>
+                        <p>Trivsel som fundament for læring</p>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">🏡</span>
+                        <h4>Billige ungdomsboliger</h4>
+                        <p>Så unge kan bo og trives i kommunen</p>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">🚲</span>
+                        <h4>Bedre cykelstier</h4>
+                        <p>Grøn transport skal være det nemme valg</p>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">🤝</span>
+                        <h4>Borgerambassadør</h4>
+                        <p>Hjælp til at navigere i systemet</p>
+                    </div>
+                    <div class="action-item">
+                        <span class="action-icon">🌳</span>
+                        <h4>Mere vild natur</h4>
+                        <p>Biodiversitet i parker og grønne områder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-wrapper">
+            <h2 class="cta-title handwritten">Vil du være med?</h2>
+            <p class="cta-text">
+                Sammen kan vi skabe den forandring, Fredensborg har brug for. 
+                Kontakt mig, hvis du vil høre mere eller bidrage til kampagnen.
+            </p>
+            <div class="cta-buttons">
+                <a href="/kontakt" class="btn btn-primary">Kontakt mig</a>
+                <a href="/nyheder" class="btn btn-outline">Følg kampagnen</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.politics-intro {
+    padding: var(--spacing-xxl) 0;
+}
+
+.politics-quote {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: var(--spacing-xxl);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(232, 93, 117, 0.05));
+    border-radius: 30px;
+    position: relative;
+}
+
+.politics-quote blockquote {
+    font-size: 2rem;
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.4;
+}
+
+.politics-quote cite {
+    color: var(--radikale-magenta);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.policy-areas {
+    padding: var(--spacing-xxl) 0;
+    background: var(--gray-100);
+}
+
+.policy-card {
+    background: var(--radikale-white);
+    border-radius: 20px;
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.policy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.policy-header {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.policy-icon {
+    flex-shrink: 0;
+}
+
+.doodle-shape {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--radikale-green), var(--radikale-magenta));
+    border-radius: 50% 40% 40% 50% / 40% 50% 50% 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--radikale-white);
+    transform: rotate(-5deg);
+}
+
+.policy-title {
+    color: var(--radikale-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+.policy-description {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+}
+
+.policy-points {
+    list-style: none;
+}
+
+.policy-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--gray-100);
+    border-radius: 10px;
+}
+
+.point-marker {
+    color: var(--radikale-green);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.vision-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.vision-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--radikale-white);
+    border: 3px dashed var(--radikale-magenta);
+    border-radius: 20px;
+    position: relative;
+}
+
+.vision-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--radikale-green);
+    color: var(--radikale-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.vision-card h3 {
+    color: var(--radikale-black);
+    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.action-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--gray-100);
+}
+
+.action-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.action-intro {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    color: var(--gray-700);
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.action-item {
+    background: var(--radikale-white);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.action-item:hover {
+    transform: translateY(-3px) rotate(1deg);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.action-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
+.action-item h4 {
+    color: var(--radikale-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+.action-item p {
+    color: var(--gray-600);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .politics-quote blockquote {
+        font-size: 1.5rem;
+    }
+    
+    .policy-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .doodle-shape {
+        margin: 0 auto;
+    }
+}
+</style>

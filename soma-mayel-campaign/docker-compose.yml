@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - ENV=production
+    volumes:
+      - ./content:/root/content
+      - ./static/images:/root/static/images
+      - ./static/videos:/root/static/videos
+    restart: unless-stopped
+    networks:
+      - soma-network
+
+  # Optional: TinaCMS backend service
+  tina:
+    image: tinacms/tinacms:latest
+    ports:
+      - "4001:4001"
+    environment:
+      - TINA_PUBLIC_CLIENT_ID=your-client-id
+      - TINA_PUBLIC_BRANCH=main
+    volumes:
+      - ./content:/content
+      - ./tina:/tina
+    networks:
+      - soma-network
+
+networks:
+  soma-network:
+    driver: bridge
