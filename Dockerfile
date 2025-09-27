@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.21-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 # Install build dependencies
 RUN apk add --no-cache git
@@ -19,7 +19,7 @@ COPY . .
 # Ensure content directories exist even if repo doesn't include them
 RUN mkdir -p content/posts content/pages
 
-# Build the application
+# Build the application (modernc.org/sqlite is pure-Go; keep CGO disabled)
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Final stage
@@ -37,9 +37,10 @@ COPY --from=builder /app/main .
 COPY --from=builder /app/templates ./templates
 COPY --from=builder /app/static ./static
 COPY --from=builder /app/content ./content
+COPY --from=builder /app/data ./data
 
 # Create directories for user content
-RUN mkdir -p content/posts content/pages
+RUN mkdir -p content/posts content/pages data
 
 # Expose port
 EXPOSE 3000

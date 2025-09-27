@@ -1,18 +1,22 @@
 package main
 
 import (
-	"log"
-	"os"
-	"soma-mayel-campaign/handlers"
+    "log"
+    "os"
+    "soma-mayel-campaign/handlers"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/compress"
-	"github.com/gofiber/fiber/v2/middleware/basicauth"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/gofiber/template/html/v2"
-	"github.com/joho/godotenv"
+    "github.com/gofiber/fiber/v2"
+    "github.com/gofiber/fiber/v2/middleware/compress"
+    "github.com/gofiber/fiber/v2/middleware/basicauth"
+    "github.com/gofiber/fiber/v2/middleware/cors"
+    "github.com/gofiber/fiber/v2/middleware/logger"
+    "github.com/gofiber/fiber/v2/middleware/recover"
+    "github.com/gofiber/template/html/v2"
+    "github.com/joho/godotenv"
+
+    "github.com/gofiber/adaptor/v2"
+    "github.com/gouniverse/cms"
+    _ "modernc.org/sqlite"
 )
 
 func main() {
@@ -43,6 +47,56 @@ func main() {
 	app.Static("/static", "./static")
 	app.Static("/content", "./content")
 
+    // CMS initialization (gouniverse/cms)
+    dbDriver := os.Getenv("DB_DRIVER")
+    if dbDriver == "" {
+        dbDriver = "sqlite"
+    }
+    dbDsn := os.Getenv("DB_DSN")
+    if dbDsn == "" {
+        dbDsn = "file:data/cms.db?_pragma=journal_mode(WAL)&_pragma=busy_timeout=5000"
+    }
+
+    cmsInstance, errCms := cms.NewCms(cms.Config{
+        DbDriver:            dbDriver,
+        DbDsn:               dbDsn,
+        Prefix:              "cms_",
+        EntitiesAutomigrate: true,
+        BlocksEnable:        true,
+        MenusEnable:         true,
+        PagesEnable:         true,
+        TemplatesEnable:     true,
+        WidgetsEnable:       true,
+        SettingsEnable:      true,
+        SettingsAutomigrate: true,
+        CacheEnable:         true,
+        CacheAutomigrate:    true,
+        LogsEnable:          true,
+        LogsAutomigrate:     true,
+        SessionEnable:       true,
+        SessionAutomigrate:  true,
+        CustomEntityList: []cms.CustomEntityStructure{
+            {
+                Type:      "post",
+                TypeLabel: "Blog Post",
+                AttributeList: []cms.CustomAttributeStructure{
+                    {Name: "title", Type: "string", FormControlLabel: "Title", FormControlType: "input"},
+                    {Name: "slug", Type: "string", FormControlLabel: "Slug", FormControlType: "input"},
+                    {Name: "excerpt", Type: "string", FormControlLabel: "Excerpt", FormControlType: "textarea"},
+                    {Name: "content", Type: "string", FormControlLabel: "Content", FormControlType: "textarea"},
+                    {Name: "author", Type: "string", FormControlLabel: "Author", FormControlType: "input"},
+                    {Name: "image", Type: "string", FormControlLabel: "Image URL", FormControlType: "input"},
+                    {Name: "date", Type: "string", FormControlLabel: "Date", FormControlType: "input"},
+                    {Name: "tags", Type: "string", FormControlLabel: "Tags (comma-separated)", FormControlType: "input"},
+                    {Name: "is_featured", Type: "string", FormControlLabel: "Featured (true/false)", FormControlType: "input"},
+                },
+            },
+        },
+    })
+    if errCms != nil {
+        log.Fatalf("Failed to initialize CMS: %v", errCms)
+    }
+
 	// Routes
 	app.Get("/", handlers.Home)
 	app.Get("/om-soma", handlers.About)
@@ -71,8 +125,12 @@ func main() {
 	})
 
 	// Admin UI
-	adminUI := app.Group("/admin", adminAuth)
-	adminUI.Get("/", handlers.AdminPage)
+    adminUI := app.Group("/admin", adminAuth)
+    // Redirect legacy admin root to CMS admin
+    adminUI.Get("/", func(c *fiber.Ctx) error { return c.Redirect("/admin/cms", fiber.StatusFound) })
+    // Mount CMS Admin under /admin/cms
+    adminUI.All("/cms", adaptor.HTTPHandlerFunc(cmsInstance.Router))
+    adminUI.All("/cms/*", adaptor.HTTPHandlerFunc(cmsInstance.Router))
 
 	// Admin API
 	adminAPI := app.Group("/api/admin", adminAuth)
@@ -89,5 +147,7 @@ func main() {
 	}
 
 	log.Printf("Server starting on http://localhost:%s", port)
-	log.Fatal(app.Listen(":" + port))
+    // Catch-all to CMS frontend (after all other routes and statics)
+    app.All("/*", adaptor.HTTPHandlerFunc(cmsInstance.FrontendHandler))
+    log.Fatal(app.Listen(":" + port))
 }
