@@ -50,6 +50,7 @@ func main() {
 	app.Get("/nyheder", handlers.News)
 	app.Get("/kontakt", handlers.Contact)
 	app.Get("/blog/:slug", handlers.BlogPost)
+	app.Get("/api/facebook/feed", handlers.FacebookFeed)
 
 	// TinaCMS API routes
 	app.Post("/api/tina/content", handlers.TinaContentAPI)
