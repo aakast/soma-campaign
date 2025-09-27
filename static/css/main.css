@@ -1,8 +1,8 @@
 /* Root Variables - Radikale Venstre Colors */
 :root {
     /* Primary palette */
-    --radikale-green: #28A745;
-    --radikale-magenta: #E85D75;
+    --radikale-green: #009540;
+    --radikale-magenta: #EC008C;
     --radikale-white: #FFFFFF;
     --radikale-black: #212529;
     
@@ -230,7 +230,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.8), rgba(232, 93, 117, 0.8));
+    background: linear-gradient(135deg, rgba(0, 149, 64, 0.8), rgba(236, 0, 140, 0.8));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -360,7 +360,7 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--radikale-magenta);
     border-color: var(--radikale-magenta);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(232, 93, 117, 0.3);
+    box-shadow: 0 5px 15px rgba(236, 0, 140, 0.3);
 }
 
 .btn-outline {
