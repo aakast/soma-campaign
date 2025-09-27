@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('navMenu');
     const navbar = document.getElementById('navbar');
     
+    // Set CSS variable for navbar height dynamically
+    function setNavbarHeightVar() {
+        if (!navbar) return;
+        const height = navbar.offsetHeight;
+        document.documentElement.style.setProperty('--navbar-height', height + 'px');
+    }
+    setNavbarHeightVar();
+    window.addEventListener('resize', setNavbarHeightVar);
+    
     // Mobile menu toggle
     if (navToggle) {
         navToggle.addEventListener('click', function() {
@@ -42,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             navbar.classList.remove('scrolled');
         }
+        // In case height changes due to style adjustments
+        setNavbarHeightVar();
     });
     
     // Hero video scroll behavior

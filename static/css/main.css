@@ -31,6 +31,9 @@
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
+
+	/* Layout */
+	--navbar-height: 80px;
 }
 
 /* Global Styles */
@@ -274,7 +277,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Content Wrapper */
 .content-wrapper {
-    padding-top: 80px;
+	padding-top: var(--navbar-height);
+}
+
+/* Generic page header offset so content isn't hidden behind fixed navbar */
+.page-header {
+	padding-top: var(--navbar-height);
 }
 
 /* Intro Section */
@@ -671,11 +679,11 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .nav-menu {
-        position: fixed;
-        top: 60px;
+		position: fixed;
+		top: var(--navbar-height);
         right: -100%;
         width: 100%;
-        height: calc(100vh - 60px);
+		height: calc(100vh - var(--navbar-height));
         background: var(--radikale-white);
         flex-direction: column;
         padding: var(--spacing-xl);
