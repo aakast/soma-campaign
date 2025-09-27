@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     images.forEach(img => imageObserver.observe(img));
     
-    // Add animation to elements when they come into view
-    const animateElements = document.querySelectorAll('.issue-card, .news-card, .intro-wrapper');
+	// Add animation to elements when they come into view
+	const animateElements = document.querySelectorAll('.issue-card, .news-card, .intro-wrapper, .fb-card');
     const animateOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -126,7 +126,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, animateOptions);
     
-    animateElements.forEach(el => animateObserver.observe(el));
+	animateElements.forEach(el => animateObserver.observe(el));
+
+	// Facebook feed hydration
+	const fbContainer = document.getElementById('facebook-feed');
+	if (fbContainer) {
+		fetch('/api/facebook/feed')
+			.then(res => res.json())
+			.then(data => {
+				if (!data || !Array.isArray(data.posts) || data.posts.length === 0) {
+					return;
+				}
+
+				// Hide plugin embed if we have posts (CSS also hides via has-posts class)
+				const fbPlugin = document.querySelector('.facebook-wrapper .fb-page');
+				if (fbPlugin) fbPlugin.style.display = 'none';
+
+				fbContainer.classList.add('has-posts');
+				const fragment = document.createDocumentFragment();
+
+				const formatDate = (iso) => {
+					try {
+						const d = new Date(iso);
+						return d.toLocaleDateString('da-DK', { day: 'numeric', month: 'long', year: 'numeric' });
+					} catch (_) {
+						return '';
+					}
+				};
+
+				const truncate = (text, n) => {
+					if (!text) return '';
+					return text.length > n ? text.slice(0, n - 1) + '…' : text;
+				};
+
+				data.posts.forEach(post => {
+					const card = document.createElement('article');
+					card.className = 'fb-card';
+
+					if (post.full_picture) {
+						const imgWrap = document.createElement('div');
+						imgWrap.className = 'fb-card-image';
+						const img = document.createElement('img');
+						img.src = post.full_picture;
+						img.alt = 'Facebook opslag';
+						imgWrap.appendChild(img);
+						card.appendChild(imgWrap);
+					}
+
+					const content = document.createElement('div');
+					content.className = 'fb-card-content';
+
+					const date = document.createElement('time');
+					date.className = 'fb-card-date';
+					date.textContent = formatDate(post.created_time);
+					content.appendChild(date);
+
+					if (post.message) {
+						const p = document.createElement('p');
+						p.className = 'fb-card-message';
+						p.textContent = truncate(post.message, 220);
+						content.appendChild(p);
+					}
+
+					if (post.permalink_url) {
+						const a = document.createElement('a');
+						a.className = 'fb-card-link';
+						a.href = post.permalink_url;
+						a.target = '_blank';
+						a.rel = 'noopener noreferrer';
+						a.textContent = 'Læs på Facebook →';
+						content.appendChild(a);
+					}
+
+					card.appendChild(content);
+					fragment.appendChild(card);
+				});
+
+				fbContainer.appendChild(fragment);
+				fbContainer.querySelectorAll('.fb-card').forEach(el => animateObserver.observe(el));
+			})
+			.catch(() => { /* silent */ });
+	}
 });
 
 // Add fadeInUp animation
