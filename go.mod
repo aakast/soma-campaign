@@ -5,6 +5,7 @@ go 1.24.5
 toolchain go1.24.7
 
 require (
+	github.com/dracory/entitystore v1.1.0
 	github.com/gofiber/adaptor/v2 v2.2.1
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/gofiber/template/html/v2 v2.1.0
@@ -24,7 +25,6 @@ require (
 	github.com/dracory/cdn v1.8.0 // indirect
 	github.com/dracory/database v0.3.0 // indirect
 	github.com/dracory/dataobject v1.6.0 // indirect
-	github.com/dracory/entitystore v1.1.0 // indirect
 	github.com/dracory/form v0.19.0 // indirect
 	github.com/dracory/hb v1.88.0 // indirect
 	github.com/dracory/logstore v1.9.0 // indirect
